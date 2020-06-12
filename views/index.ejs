@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>sk-websocket-multiconnexion</title>
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+    <script src="lib/jquery-3.4.1.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script type="text/javascript">
+      var socket = io.connect();
+    </script>
+
+    <script src="js/script.js"></script>
+  </head>
+
+  <body>
+
+    <div id="people"></div>
+
+    <div id="gamepad">
+      <button class="button-direction" data-direction="top">↑</button>
+      <br>
+      <button class="button-direction" data-direction="left">←</button>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button class="button-direction" data-direction="right">→</button>
+      <br>
+      <button class="button-direction" data-direction="down">↓</button>
+    </div>
+
+  </body>
+</html>

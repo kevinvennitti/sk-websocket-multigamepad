@@ -1,0 +1,53 @@
+body {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+  background:#0019CC;
+  color:#0019CC;
+}
+
+.person {
+  width:80px;
+  height:80px;
+  overflow: hidden;
+
+  color:#0019CC;
+  background:#F7CE4C;
+  border-radius:50%;
+  font-size:12px;
+
+  line-height:80px;
+  text-align:center;
+
+  position:absolute;
+  transform:translate(-50%, -50%);
+  transition: all 300ms ease;
+}
+
+#gamepad {
+  position:absolute;
+  bottom:0;
+  right:0;
+  margin:24px;
+
+  text-align:center;
+  white-space:nowrap;
+}
+
+.button-direction {
+  width:50px;
+  height:50px;
+
+  background:#F7CE4C;
+  color:#0019CC;
+  border-radius:50%;
+  font-size:30px;
+  border:none;
+  outline:none;
+  line-height:50px;
+  text-align:center;
+  cursor:pointer;
+}
+
+.button-direction:active {
+  background:#EC4E3A;
+  color:#0019CC;
+}
