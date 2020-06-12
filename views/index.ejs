@@ -21,13 +21,19 @@
     <div id="people"></div>
 
     <div id="gamepad">
-      <button class="button-direction" data-direction="top">↑</button>
+      <button class="button-direction" data-direction="up">↑</button>
       <br>
       <button class="button-direction" data-direction="left">←</button>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <button class="button-direction" data-direction="right">→</button>
       <br>
       <button class="button-direction" data-direction="down">↓</button>
+    </div>
+    
+    <div id="params">
+      <% params.colors.forEach(function(color) { %>
+        <div class="button-color" data-color="<%= color %>" style="background:<%= color %>"></div>
+      <% }); %>
     </div>
 
   </body>

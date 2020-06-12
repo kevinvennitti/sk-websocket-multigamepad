@@ -2,6 +2,9 @@ body {
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
   background:#0019CC;
   color:#0019CC;
+  overflow:hidden;
+  width:100%;
+  height:100%;
 }
 
 .person {
@@ -36,18 +39,42 @@ body {
   width:50px;
   height:50px;
 
-  background:#F7CE4C;
-  color:#0019CC;
+  background:transparent;
+  color:white;
   border-radius:50%;
   font-size:30px;
-  border:none;
+  border:solid 3px white;
   outline:none;
-  line-height:50px;
+  line-height:30px;
   text-align:center;
   cursor:pointer;
 }
 
 .button-direction:active {
-  background:#EC4E3A;
+  background:white;
   color:#0019CC;
 }
+
+#params {
+  position:absolute;
+  bottom:0;
+  left:0;
+  margin:24px;
+  background:white;
+  border-radius:100px;
+  padding:8px 4px;
+  
+  display:flex;
+}
+
+.button-color {
+  width:30px;
+  height:30px;
+  border-radius:30px;
+  margin:0 4px;
+  cursor:pointer;
+}
+
+.button-color:hover {
+  opacity:.8;
+} 

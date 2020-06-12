@@ -4,31 +4,46 @@ var path = require('path');
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-var people = [];
-
 server.listen(3000);
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+
+
+var people = [];
+
+var params = {
+  colors: [
+    '#F7CE4C',
+    '#00CC76',
+    '#EC4E3A',
+    '#85D0EE',
+  ]
+}
+
+
 app.get('/', function (req, res) {
-  res.render('index');
+  res.render('index', {
+    params: params
+  });
 });
 
 
 io.on('connection', function (socket) {
   console.log("Quelqu'un s'est connecté !", socket.id);
-
+  
   const newPerson = {
     id: socket.id,
     x: 50,
-    y: 50
+    y: 50,
+    color: params.colors[Math.floor(Math.random() * params.colors.length)]
   };
 
   people.push(newPerson);
 
   socket.emit('hello', {
-    list: people
+    people: people
   });
 
   socket.emit('helloNewPerson', {
@@ -42,8 +57,21 @@ io.on('connection', function (socket) {
   socket.on('newMove', function(data) {
     console.log("Quelqu'un s'est déplacé", data.person.id);
     console.log(data);
-
+    
+    updatePeopleList(data.person);
+    
     socket.broadcast.emit('someoneHasMoved', {
+      person: data.person
+    });
+  });
+  
+  socket.on('newColor', function(data) {
+    console.log("Quelqu'un a changé sa couleur", data.person.id);
+    console.log(data);
+    
+    updatePeopleList(data.person);
+    
+    socket.broadcast.emit('someoneHasChangedColor', {
       person: data.person
     });
   });
@@ -61,3 +89,11 @@ io.on('connection', function (socket) {
     })
   })
 });
+
+function updatePeopleList(person) {
+  for (let i = 0; i < people.length; i++) {
+    if (people[i].id == person.id) {
+      people[i] = person;
+    }
+  }
+}
