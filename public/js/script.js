@@ -8,7 +8,7 @@ $(function(){
     console.log('Données reçues :');
     console.log(data);
 
-    data.list.forEach(function(person) {
+    data.people.forEach(function(person) {
       addPerson(person);
     })
   });
@@ -41,12 +41,24 @@ $(function(){
     movePerson(data.person);
   });
 
+  socket.on('someoneHasChangedColor', function (data) {
+    console.log('Nouvelle couleur à appliquer !');
+    console.log('Données reçues :');
+    console.log(data);
+
+    setPersonColor(data.person);
+  });
+  
+
   function addPerson(person) {
-    $('#people').append('<div class="person" style="left:'+person.x+'%; top:'+person.y+'%" data-id="'+person.id+'">'+person.id+'</div>');
+    $('#people').append('<div class="person" data-id="'+person.id+'"></div>');
+  
+    movePerson(person);
+    setPersonColor(person);
   }
 
   function removePerson(personId) {
-    $('.person[data-id="'+personId+'"]').fadeOut();
+    $('.person[data-id="'+personId+'"]').remove();
   }
 
   function movePerson(person) {
@@ -57,8 +69,27 @@ $(function(){
     });
   }
 
+  function setPersonColor(person) {
+    let personDOM = $('.person[data-id="'+person.id+'"]');
+    personDOM.css({
+      'background': person.color
+    });
+  }
 
 
+
+  $('.button-color').click(function(){
+    let color = $(this).data('color');
+    
+    player.color = color;
+    
+    socket.emit('newColor', {
+      person: player
+    });
+    
+    setPersonColor(player);
+  });
+  
 
 
   $('.button-direction').click(function() {
